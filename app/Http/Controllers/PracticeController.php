@@ -22,8 +22,9 @@ class PracticeController extends Controller
         return view('practice3', ['testParam' => "test"]);
     }
 
-    public function getPractice(): \Illuminate\Http\JsonResponse
+    public function getPractice(): \Illuminate\View\View
     {
-        return response()->json(Practice::all());
+        $practices = Practice::all();
+        return view('getPractice', ['practices' => $practices]);
     }
 }

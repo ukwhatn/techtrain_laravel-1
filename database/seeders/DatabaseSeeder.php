@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Practice;
 use Illuminate\Database\Seeder;
 
+// TODO: ファイル自体は最初からあるのでカリキュラムとズレあり
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,8 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            SheetTableSeeder::class,
-        ]);
+        Practice::factory(10)->create();
     }
 }
