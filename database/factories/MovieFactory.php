@@ -15,9 +15,15 @@ class MovieFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->unique()->word();
+        // #を削除
+        $colorCode = substr($this->faker->hexColor(), 1);
         return [
-            'title' => $this->faker->unique()->word,
-            'image_url' => $this->faker->imageUrl(),
+            'title' => $title,
+            'image_url' => "https://placehold.jp/${colorCode}/ffffff/150x150.png?text=${title}",
+            'published_year' => $this->faker->year(),
+            'is_showing' => $this->faker->boolean(),
+            'description' => $this->faker->sentence(),
         ];
     }
 }
