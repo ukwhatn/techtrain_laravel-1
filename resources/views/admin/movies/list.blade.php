@@ -15,6 +15,7 @@
             <th>公開年</th>
             <th>上映ステータス</th>
             <th>概要</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,8 @@
                 <td>{{ $movie->published_year }}</td>
                 <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
                 <td>{{ $movie->description }}</td>
+                <td>
+                    <a href="/admin/movies/{{ $movie->id }}/edit">編集</a>
             </tr>
         @endforeach
     </tbody>
