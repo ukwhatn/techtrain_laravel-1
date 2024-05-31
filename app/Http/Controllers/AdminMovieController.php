@@ -69,4 +69,13 @@ class AdminMovieController extends Controller
 
         return redirect('/admin/movies');
     }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        // なければ404
+        $movie = Movie::findOrFail($id);
+        $movie->delete();
+
+        return redirect('/admin/movies')->with('flash_message', '削除しました');
+    }
 }

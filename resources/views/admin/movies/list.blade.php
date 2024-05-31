@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movies</title>
-</head>
-<body>
-<table>
-    <thead>
+@extends('layouts.app')
+
+@section('content')
+    <table>
+        <thead>
         <tr>
             <th>タイトル</th>
             <th>画像</th>
@@ -17,8 +11,8 @@
             <th>概要</th>
             <th>操作</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @foreach ($movies as $movie)
             <tr>
                 <td>{{ $movie->title }}</td>
@@ -27,10 +21,15 @@
                 <td>{{ $movie->is_showing ? '上映中' : '上映予定' }}</td>
                 <td>{{ $movie->description }}</td>
                 <td>
-                    <a href="/admin/movies/{{ $movie->id }}/edit">編集</a>
+                    <a href="/admin/movies/{{ $movie->id }}/edit">編集</a> /
+                    {{-- 削除はプロンプトあり --}}
+                    <form action="/admin/movies/{{ $movie->id }}/destroy" method="post" style="display: inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" onclick="return confirm('削除しますか？')">削除</button>
+                    </form>
             </tr>
         @endforeach
-    </tbody>
-</table>
-</body>
-</html>
+        </tbody>
+    </table>
+@endsection
